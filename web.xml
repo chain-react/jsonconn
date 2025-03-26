@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<!-- DemoApi -->
+	<servlet>
+		<servlet-name>Demo</servlet-name>
+		<servlet-class>cn770880.jsonconn.RestServlet</servlet-class>
+		<init-param>
+			<param-name>ApiDef</param-name>
+			<param-value>
+				mobi.wandan.api.User#mobi.wandan.impl.UserImpl;
+				mobi.wandan.api.OnlineUser#mobi.wandan.impl.OnlineUserImpl;
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>TokenParser</param-name>
+			<param-value>com.xxx.MyToKenParse</param-value><!-- 必须实现cn770880.jsonconn.TokenParser接口 -->
+		</init-param>
+		<load-on-startup/>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Demo</servlet-name>
+		<url-pattern>/api/**</url-pattern>
+	</servlet-mapping>
+</web-app>

@@ -1,0 +1,51 @@
+一、接口地址
+https://www.wandan.mobi/api/v1/[模块名]/[方法名]
+注：url中的方法名除了用于统计access日志，其他没有任何作用
+
+二、请求格式(json协议，编码格式为utf-8)
+{
+	"method": "sayHello",//调用的方法名
+	"token": "Unknown",//token表示用户的身份凭证，非必填
+	"subtoken": "Unknown",//subtoken表示用户的当前子账号身份凭证，非必填
+	"deviceid": "Unknown",//客户端id，如果该客户端支持push，那就填push设备id，非必填
+	"edition": "public",//public 大众版  major 专业版
+	"appid": "Unknown",//微信appid，非必填
+    "head": {//head信息能填多少就填写多少，不填写也可以
+        "ostype": 1,//【微信登录必填】0、未知、1、小程序；2、IOS；3、Android；4、公众号浏览器：5、普通浏览器
+		"littleostype": 101,//小程序类型  101 画个头  102 奇迹暖暖
+        "oslevel": "22",//操作系统版本号
+        "appver": "68",//APP的版本号
+        "devicename": "m3",//设备名称
+        "imei": "861851030027464",
+        "cpuserial": "98AFBNP22FJ5",
+        "guid": "f0f8efee-4106-43be-bb7b-5e427a2181c4",
+        "imsi": "460029935533447",
+        "mac": "40:c6:2a:7d:c6:dc",
+        "nettype": "1:\"FAST_BC3F50\"",
+        "width": 720,
+        "height": 1280
+    },
+    "params": [//方法传入的参数数组，若无参数则传入 []
+        "Hello 参数",
+		100
+    ],
+    "id": 1//调用标识符，用于标示一次远程调用过程
+}
+
+三、应答格式
+{
+    "errCode": 0,
+    "errMsg": "",
+    "obj": null,
+    "id": 1
+}
+注：
+errCode ：错误码，无错误为0。
+errMsg  ：错误提示。
+obj     : 返回值，若无返回值，则返回null。
+id      : 调用标识符，与调用方传入的标识符一致。
+
+四、范例
+https://www.wandan.mobi/api/v1/test/subtract
+--> {"method": "subtract", "params": [42, 23], "id": 1}
+<-- {"errCode": 0,"errMsg": "", "obj": 19, "id": 1}

@@ -1,0 +1,53 @@
+<project basedir="." name="demo" default="jar">
+	
+	<!--配置值-->
+	<property name="jar_name" value="jsonconn-1.0.jar"/>
+	<property name="src" value="src"/>
+	<property name="lib" value="lib"/>
+	<property name="build" value="build"/>
+	<property name="dist" value="dist"/> 
+
+	 <!--项目的classpath库 -->
+    <path id="project.classpath">
+        <fileset dir="${lib}" />
+    </path>
+
+	<!--清理临时生成的文件-->
+	<target name="clear">  
+		<delete file="${jar_name}"/>
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+	</target>
+	
+	<!--初始化工作-->
+	<target name="init" depends="clear">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${dist}"/>
+		<mkdir dir="${dist}/src"/>
+	</target>
+
+	<!--编译-->
+	<target name="compile" depends="init">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac includeantruntime="on" debug="on" includes="**/cn770880/jsonconn/**"
+			srcdir="${src}" destdir="${build}" encoding="utf-8">
+			 <classpath>
+                <path refid="project.classpath">
+                </path>
+            </classpath>
+		</javac>
+	</target>
+
+    <!--打包jar-->
+	<target name="jar" depends="compile">  
+		<copy todir="${dist}/src">
+            <fileset dir="${src}" includes="**/cn770880/jsonconn/**"/>
+        </copy>
+		<copy todir="${dist}">
+            <fileset dir="${build}"/>
+        </copy>
+		<jar destfile="${jar_name}" basedir="${dist}"> 
+        </jar> 
+	</target>
+
+</project>
