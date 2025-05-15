@@ -30,7 +30,7 @@
 	<target name="compile" depends="init">
 		<!-- Compile the java code from ${src} into ${build} -->
 		<javac includeantruntime="on" debug="on" includes="**/cn770880/jsonconn/**"
-			srcdir="${src}" destdir="${build}" encoding="utf-8">
+			srcdir="${src}" destdir="${build}" encoding="utf-8" source="1.8" target="1.8">
 			 <classpath>
                 <path refid="project.classpath">
                 </path>
